@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "Gestion_Cabinet_Medical/lib/mysql-connector-j-8.2.0.jar"
+  ]
+}

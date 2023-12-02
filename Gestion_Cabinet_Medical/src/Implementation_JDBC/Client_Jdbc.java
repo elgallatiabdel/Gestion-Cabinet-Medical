@@ -11,17 +11,18 @@ import Classes.Client;
 import Connection.Connect;
 import DAO.ClientDao;
 
-public class Client_Jdbc implements ClientDao {
+
+public class Client_Jdbc implements ClientDao{
   private static Connect connect;
   private static Connection con;
+  private PreparedStatement stm;
+	private ResultSet rs;
 
   static {
     connect = Connect.getCon();
     con = connect.getConnection();
   }
 
-	private PreparedStatement stm;
-	private ResultSet rs;
 
   @Override
   public List<Client> getAllClients(){
@@ -100,5 +101,3 @@ public class Client_Jdbc implements ClientDao {
   }
 
 }
-
-

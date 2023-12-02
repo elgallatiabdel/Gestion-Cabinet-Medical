@@ -14,6 +14,7 @@ import DAO.MedecinDao;
 
 public class MedecinFichier implements MedecinDao, Serializable {
   private static final long serialVersionUID = 3L;
+  private static long lastMedecinId = 0;
 
   @Override
   public List<Medecin> getAllMedecins() {
@@ -30,6 +31,8 @@ public class MedecinFichier implements MedecinDao, Serializable {
   @Override
   public void addMedecin(Medecin M) {
     List<Medecin> medecins = getAllMedecins();
+    lastMedecinId++;
+    M.setId(lastMedecinId);
     medecins.add(M);
     savemedecin(medecins);
   }

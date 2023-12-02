@@ -14,6 +14,7 @@ import DAO.CreneauDao;
 
 public class CreneauFichier implements CreneauDao, Serializable {
   private static final long serialVersionUID = 2L;
+  private static long lastCreneauId = 0;
 
   @Override
   public List<Creneau> getAllCreneaus() {
@@ -28,9 +29,11 @@ public class CreneauFichier implements CreneauDao, Serializable {
 
   @Override
   public void addCreneau(Creneau C) {
-    List<Creneau> creneau = getAllCreneaus();
-    creneau.add(C);
-    savecreneau(creneau);
+    List<Creneau> creneaux = getAllCreneaus();
+    lastCreneauId++;
+    C.setId(lastCreneauId);
+    creneaux.add(C);
+    savecreneau(creneaux);
   }
 
   @Override

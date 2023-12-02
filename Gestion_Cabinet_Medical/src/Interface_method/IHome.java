@@ -1,6 +1,6 @@
 package Interface_method;
 
 
-public class IMedecin{
+public class IHome {
   
 }

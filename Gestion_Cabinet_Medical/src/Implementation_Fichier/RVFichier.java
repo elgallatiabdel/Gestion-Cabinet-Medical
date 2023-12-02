@@ -14,6 +14,7 @@ import DAO.RVDao;
 
 public class RVFichier implements RVDao, Serializable {
   private static final long serialVersionUID = 4L;
+  private static long lastRVId = 0;
 
   @Override
   public List<RV> getAllRVs() {
@@ -30,6 +31,8 @@ public class RVFichier implements RVDao, Serializable {
   @Override
   public void addRV(RV rv) {
     List<RV> rvs = getAllRVs();
+    lastRVId++;
+    rv.setId(lastRVId);
     rvs.add(rv);
     saveRvs(rvs);
   }

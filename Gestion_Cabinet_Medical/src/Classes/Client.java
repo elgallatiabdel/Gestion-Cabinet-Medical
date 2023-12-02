@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
-		private static long lastClientId = 0;
+	private static long lastClientId = 0;
 
     private long id;
     private int version;

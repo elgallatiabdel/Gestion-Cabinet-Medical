@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class RV implements Serializable {
 	private static final long serialVersionUID = 4L;
+	private static long lastRvId = 0;
   private long id;
 	private String jour;
 	private long id_client;
@@ -18,7 +19,10 @@ public class RV implements Serializable {
 
   public RV() {}
 
-  public void setId(long id) {this.id = id;}
+  public void setId(long id) {
+		lastRvId++;
+		this.id = lastRvId;
+	}
   public long getId() {return id;}
 
 	public long getId_client() {return id_client;}

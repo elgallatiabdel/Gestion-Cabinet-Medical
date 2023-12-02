@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Creneau implements Serializable {
 	private static final long serialVersionUID = 2L;
-	
+	private static long lastCreneauId = 0;
+
 	private long id;
 	private int version;
 	private int hdebut;
@@ -25,7 +26,10 @@ public class Creneau implements Serializable {
 
 	public Creneau() {}
 
-	public void setId(long id) {this.id = id;}
+	public void setId(long id) {
+		lastCreneauId++;
+		this.id = lastCreneauId;
+	}
 	public long getId() {return id;}
 
 	public int getVersion() {return version;}

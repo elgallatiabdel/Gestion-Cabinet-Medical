@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Medecin implements Serializable {
 	private static final long serialVersionUID = 3L;
+	private static long lastMedecinId = 0;
+
   private long id;
 	private int version;
 	private String titre;
@@ -20,7 +22,10 @@ public class Medecin implements Serializable {
 
   public Medecin() {}
 
-  public void setId(long id) {this.id = id;}
+  public void setId(long id) {
+		lastMedecinId++;
+		this.id = lastMedecinId;
+	}
   public long getId() {return id;}
 
 	public int getVersion() {return version;}

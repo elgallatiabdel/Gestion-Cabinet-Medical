@@ -9,7 +9,6 @@ public class Connect {
 	private static Connect instance;
 
 	private Connect() {
-		
 		try {
 				con = DriverManager.getConnection("jdbc:mysql://localhost/GCM", "root", "");
 		} catch (SQLException e) {
@@ -25,6 +24,6 @@ public class Connect {
 	}
 
 	public Connection getConnection() {
-		return con;
+		return con ;
 	}
 }

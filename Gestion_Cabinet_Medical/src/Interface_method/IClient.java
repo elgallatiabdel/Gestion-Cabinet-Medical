@@ -34,16 +34,14 @@ public class IClient extends JPanel {
 	String type;
 	 
 	public IClient(String type){
-
-
 		this.type = type;
 		p1 = new JPanel();
 		p2 = new JScrollPane();
 		p0 = new JPanel();
 		table = new JTable() {
 			public boolean isCellEditable(int rowIndex, int colIndex) {
-        		return false;
-        	}
+        return false;
+      }
 		};
 		versiontf = new JTextField();
 		titretf = new JTextField();
@@ -65,19 +63,23 @@ public class IClient extends JPanel {
 		this.retActionPerformed();
 		this.add(p2);
 	}
+
 	public void addActionPerformed() {
 		btn.setText("add");
 		btn.removeActionListener(updateevent);
 		btn.addActionListener(this.addevent);
 	}
+
 	public void updateActionPerformed(long id) {
 		updateevent = new updateAction(id);
 		btn.removeActionListener(this.addevent);
 		btn.addActionListener(this.updateevent);
 	}
+
 	public void removeActionPerformed(long id) {
 		remove.addActionListener(new removeAction(id));
 	}
+
 	public void retActionPerformed() {
 		ret.addActionListener(new ActionListener() {
 			@Override
@@ -95,6 +97,7 @@ public class IClient extends JPanel {
 			}
 		});
 	}
+
 	public void tableMouseClicked() {
 		this.table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
@@ -113,6 +116,7 @@ public class IClient extends JPanel {
 		    }
 		});
 	}
+
 	public void additems() {
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
@@ -134,27 +138,28 @@ public class IClient extends JPanel {
 		p1.add(p0);
 		this.add(p1, BorderLayout.WEST);
 	}
+	
 	public void afficheTable(){
-        try{
-        	ClientDao C = new ClientFactory().getClient(type);
-        	List<Client> clients = C.getAllClients();
-            String [] header = {"id","version","titre","nom","prenom"};
-            String [] row = new String[5];
-            DefaultTableModel model = new DefaultTableModel(null,header);
-            for(Client clt : clients){
-            	row[0] = String.valueOf(clt.getId());
-                row[1] = String.valueOf(clt.getVersion());
-                row[2] = clt.getTitre();
-                row[3] = clt.getNom();
-                row[4] = clt.getPrenom();
-                model.addRow(row);
-            }
-            table.setModel(model);
-            p2.getViewport().add(table);
-            p2.revalidate();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+    try{
+			ClientDao C = new ClientFactory().getClient(type);
+			List<Client> clients = C.getAllClients();
+			String [] header = {"id","version","titre","nom","prenom"};
+			String [] row = new String[5];
+			DefaultTableModel model = new DefaultTableModel(null,header);
+			for(Client clt : clients){
+				row[0] = String.valueOf(clt.getId());
+				row[1] = String.valueOf(clt.getVersion());
+				row[2] = clt.getTitre();
+				row[3] = clt.getNom();
+				row[4] = clt.getPrenom();
+				model.addRow(row);
+			}
+			table.setModel(model);
+			p2.getViewport().add(table);
+			p2.revalidate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	class addAction implements ActionListener {
 		@Override

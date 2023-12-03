@@ -13,15 +13,13 @@ import DAO.CreneauDao;
 
 public class Creneau_Jdbc implements CreneauDao {
   List<Creneau> creneaux = new ArrayList<Creneau>();
-	private static Connect connect;
   private static Connection con;
-
-  static {
-    connect = Connect.getCon();
-    con = connect.getConnection();
-  }
 	private PreparedStatement stm;
 	private ResultSet rs;
+
+  static {
+    con = Connect.getCon().getConnection();
+  }
 
   @Override
   public List<Creneau> getAllCreneaus() {

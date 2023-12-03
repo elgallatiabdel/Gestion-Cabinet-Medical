@@ -30,7 +30,7 @@ import DAO.RVDao;
 import Factory_Class.ClientFactory;
 import Factory_Class.CreneauFactory;
 import Factory_Class.RvFactory;
-import itemRender.Item;
+import ItemRender.Item;
 import Classes.Client;
 import Classes.Creneau;
 import Classes.RV;

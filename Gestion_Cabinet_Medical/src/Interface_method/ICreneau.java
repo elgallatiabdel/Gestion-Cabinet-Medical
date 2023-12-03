@@ -1,10 +1,5 @@
 package Interface_method;
 
-// public class ICreneau {
-  
-// }
-
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -29,7 +24,7 @@ import DAO.CreneauDao;
 import DAO.MedecinDao;
 import Factory_Class.CreneauFactory;
 import Factory_Class.MedecinFactory;
-import itemRender.Item;
+import ItemRender.Item;
 import Classes.Creneau;
 import Classes.Medecin;
 
@@ -78,6 +73,7 @@ public class ICreneau extends JPanel {
 		this.retActionPerformed();
 		this.add(p2);
 	}
+	
 	public void additems() {
 		JPanel p3 = new JPanel();
 		JPanel p4 = new JPanel();
@@ -115,19 +111,23 @@ public class ICreneau extends JPanel {
 		p1.add(p0);
 		this.add(p1, BorderLayout.WEST);
 	}
+
 	public void addActionPerformed() {
 		btn.setText("add");
 		btn.removeActionListener(this.updateevent);
 		btn.addActionListener(this.addevent);
 	}
+
 	public void updateActionPerformed(long id) {
 		updateevent = new updateAction(id);
 		btn.removeActionListener(this.addevent);
 		btn.addActionListener(this.updateevent);
 	}
+
 	public void removeActionPerformed(long id) {
 		remove.addActionListener(new removeAction(id));
 	}
+
 	public void retActionPerformed() {
 		ret.addActionListener(new ActionListener() {
 			@Override
@@ -147,8 +147,8 @@ public class ICreneau extends JPanel {
 			}
 		});
 	}
+
 	public void tableMouseClicked() {
-		
 		ICreneau.table.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {
 				long id = Long.parseLong(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
@@ -167,35 +167,7 @@ public class ICreneau extends JPanel {
 		    }
 		});
 	}
-	// public static void afficheTable(String type){
-  //       try{
-  //       	new CreneauFactory();
-	// 				CreneauDao CR = CreneauFactory.getClient(type);
-  //       	List<Creneau> creneaux = CR.getAllCreneaus();
-  //           String [] header = {"id","version","hdebut","mdebut","hfin","mfin","id medecin","medecin"};
-  //           String [] row = new String[8];
-  //           DefaultTableModel model = new DefaultTableModel(null,header);
-  //           for(Creneau cr : creneaux){
-	// 						Medecin m = new MedecinFactory().getClient(type).getMedecin(cr.getId_medecin());
-  //           	row[0] = String.valueOf(cr.getId());
-  //               row[1] = String.valueOf(cr.getVersion());
-  //               row[2] = String.valueOf(cr.getHdebut());
-  //               row[3] = String.valueOf(cr.getMdebut());
-  //               row[4] = String.valueOf(cr.getHfin());
-  //               row[5] = String.valueOf(cr.getMfin());
-  //               row[6] = String.valueOf(m.getId());
-  //               row[7] = m.getNom()+" "+m.getPrenom();
-  //               model.addRow(row);
-  //           }
-  //           table.setModel(model);
-  //           p2.getViewport().add(table);
-  //           p2.revalidate();
-  //       }catch(Exception e){
-  //           e.printStackTrace();
-  //       }
-	// }
 
-	// Modifier votre méthode afficheTable dans la classe ICreneau
 	public static void afficheTable(String type) {
 		try {
 				new CreneauFactory();

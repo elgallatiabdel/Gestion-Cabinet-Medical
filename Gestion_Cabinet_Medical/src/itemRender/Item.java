@@ -1,12 +1,12 @@
-package itemRender;
+package ItemRender;
 
 public class Item {
 	private long id;
-    private String name;
-    public Item(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+  private String name;
+  public Item(long id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 	public long getId() {
 		return id;
 	}

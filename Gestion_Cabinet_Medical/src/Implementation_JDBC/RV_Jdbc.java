@@ -13,16 +13,14 @@ import DAO.RVDao;
 
 public class RV_Jdbc implements RVDao{
   List<RV> RVs = new ArrayList<RV>();
-	private static Connect connect;
   private static Connection con;
-
-  static {
-    connect = Connect.getCon();
-    con = connect.getConnection();
-  }
 	private PreparedStatement stm;
 	private ResultSet rs;
 
+  static {
+    con = Connect.getCon().getConnection();
+  }
+	
   @Override
 	public List<RV> getAllRVs() {
 		String req = "SELECT * FROM rv";

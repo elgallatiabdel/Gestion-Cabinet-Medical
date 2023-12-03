@@ -9,19 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class IChoice extends JFrame {
-	JButton sql,fichier;
+	JButton data_base,fichier;
 	public IChoice() {
 		this.setTitle("Choix d'implementation");
 		this.setSize(350,100);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new FlowLayout());
-		sql = new JButton("Base de données");
+		data_base = new JButton("Base de données");
 		fichier = new JButton("Fichier");
-		sql.addActionListener(new ActionListener() {
+		data_base.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new IHome(sql.getText());
+				new IHome(data_base.getText());
 				setVisible(false);
 			}
 		});
@@ -32,7 +32,7 @@ public class IChoice extends JFrame {
 				setVisible(false);
 			}
 		});
-		this.add(sql);
+		this.add(data_base);
 		this.add(fichier);
 		this.setVisible(true);
 	}

@@ -13,16 +13,14 @@ import DAO.MedecinDao;
 
 public class Medecin_Jdbc implements MedecinDao {
   List<Medecin> medecins = new ArrayList<Medecin>();
-	private static Connect connect;
   private static Connection con;
-
-  static {
-    connect = Connect.getCon();
-    con = connect.getConnection();
-  }
 	private PreparedStatement stm;
 	private ResultSet rs;
 
+  static {
+    con = Connect.getCon().getConnection();
+  }
+	
   @Override
   public List<Medecin> getAllMedecins() {
 		String req = "SELECT * FROM medecins";

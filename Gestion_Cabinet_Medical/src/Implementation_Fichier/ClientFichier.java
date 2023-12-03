@@ -7,7 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import Classes.Client;
 import DAO.ClientDao;
@@ -15,6 +17,7 @@ import DAO.ClientDao;
 public class ClientFichier implements ClientDao, Serializable {
   private static final long serialVersionUID = 1L;
   private static long lastClientId = 0;
+  private Set<Long> usedIds = new HashSet<>();
 
   @Override
   public List<Client> getAllClients() {
@@ -24,16 +27,32 @@ public class ClientFichier implements ClientDao, Serializable {
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
+    updateUsedIdsClient(clients);
     return clients;
   }
 
   @Override
   public void addClient(Client client) {
     List<Client> clients = getAllClients();
-    lastClientId++;
-    client.setId(lastClientId);
+    long newId = generateUniqueIdClient();
+    client.setId(newId);
     clients.add(client);
+    usedIds.add(newId);
     saveClients(clients);
+  }
+
+  private synchronized long generateUniqueIdClient() {
+    lastClientId++;
+    while (usedIds.contains(lastClientId)) {
+      lastClientId++;
+    }
+    return lastClientId;
+  }
+
+  private void updateUsedIdsClient(List<Client> clients) {
+    for (Client c : clients) {
+      usedIds.add(c.getId());
+    }
   }
 
   @Override

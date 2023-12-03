@@ -7,7 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import Classes.RV;
 import DAO.RVDao;
@@ -15,6 +17,7 @@ import DAO.RVDao;
 public class RVFichier implements RVDao, Serializable {
   private static final long serialVersionUID = 4L;
   private static long lastRVId = 0;
+  private Set<Long> usedIds = new HashSet<>();
 
   @Override
   public List<RV> getAllRVs() {
@@ -25,17 +28,33 @@ public class RVFichier implements RVDao, Serializable {
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
     }
+    updateUsedIdsRv(rvs);
     return rvs;
   }
 
   @Override
   public void addRV(RV rv) {
     List<RV> rvs = getAllRVs();
-    lastRVId++;
-    rv.setId(lastRVId);
+    long newId = generateUniqueIdRv();
+    rv.setId(newId);
     rvs.add(rv);
+    usedIds.add(newId);
     saveRvs(rvs);
   }
+
+  private synchronized long generateUniqueIdRv() {
+        lastRVId++;
+        while (usedIds.contains(lastRVId)) {
+            lastRVId++;
+        }
+        return lastRVId;
+    }
+
+    private void updateUsedIdsRv(List<RV> rvs) {
+        for (RV r : rvs) {
+            usedIds.add(r.getId());
+        }
+    }
 
   @Override
   public void updateRV(RV rv) {
